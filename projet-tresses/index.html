@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulaire - Nuit des Tresses Africaines 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="logo/logo.png" alt="Logo RAF MIXTE COIFFURE" class="logo" />
+      <h1>Formulaire de Participation – Coiffeuses Collaboratrices</h1>
+      <p class="subtitle">
+        Dans le cadre de <strong>La Nuit des Tresses Africaines 3</strong> (22 nov. 2025 à Parakou), RAF MIXTE COIFFURE invite des coiffeuses talentueuses à rejoindre cet événement dédié à la beauté capillaire africaine.
+      </p>
+      <p class="subtitle">
+        Ce formulaire recueille les infos nécessaires à la sélection : <strong>expérience</strong>, <strong>spécialités</strong> et <strong>motivation</strong>.
+      </p>
+      <p class="subtitle">
+        La sélection se fera selon le <strong>professionnalisme</strong>, la <strong>créativité</strong>, la <strong>disponibilité</strong> et l’<strong>engagement</strong>.
+      </p>
+    </header>
+
+    <form id="formulaire" method="POST" action="https://script.google.com/macros/s/AKfycbzldm1SH4Cas_uN878v5W3nX5JshfbLd7SzrXUYrXhq66CweMhDyUePYSFAw0lnse0/exec">
+      <h2>Informations personnelles</h2>
+      <label>Nom complet :
+        <input type="text" name="nom" required>
+      </label>
+      <label>Nom du salon :
+        <input type="text" name="salon">
+      </label>
+      <label>Téléphone WhatsApp :
+        <input type="tel" name="telephone" required>
+      </label>
+      <label>Email :
+        <input type="email" name="email" required>
+      </label>
+      <label>Ville / Quartier :
+        <input type="text" name="ville" required>
+      </label>
+
+      <h2>Informations professionnelles</h2>
+      <label>Expérience en coiffure (en années) :
+        <input type="number" name="experience" min="0">
+      </label>
+      <label>Spécialités :
+        <input type="text" name="specialites">
+      </label>
+      <label>Avez-vous déjà participé à un événement ?
+        <select name="evenement">
+          <option>Oui</option>
+          <option>Non</option>
+        </select>
+      </label>
+      <label>Si oui, précisez :
+        <input type="text" name="details_evenement">
+      </label>
+
+      <h2>Portfolio</h2>
+      <label>Lien vers vos pages (Facebook, Instagram...) :
+        <input type="url" name="portfolio">
+      </label>
+      <label>Upload de photos (optionnel) :
+        <input type="file" name="photos" multiple>
+      </label>
+
+      <h2>Engagement</h2>
+      <label>
+        <input type="checkbox" name="dispo" required> Je suis disponible le 22 novembre 2025
+      </label>
+      <label>
+        <input type="checkbox" name="conditions" required> J’accepte les conditions de participation
+      </label>
+
+      <label>Motivation personnelle :
+        <textarea name="motivation" rows="4" placeholder="Pourquoi souhaitez-vous participer ? (150 mots max)"></textarea>
+      </label>
+
+      <label>
+        <input type="checkbox" required> Je confirme l’exactitude des informations fournies
+      </label>
+
+      <button type="submit">Envoyer ma candidature</button>
+    </form>
+  </div>
+
+  <!-- ✅ Script JS pour confirmation et reset -->
+  <script>
+    const form = document.getElementById("formulaire");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // Empêche le rechargement
+
+      const data = new FormData(form);
+
+      fetch(form.action, {
+        method: "POST",
+        body: data
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("✅ Merci ! Votre candidature a été envoyée avec succès.");
+          form.reset(); // Vide le formulaire
+        } else {
+          alert("❌ Erreur lors de l'envoi. Veuillez réessayer.");
+        }
+      })
+      .catch(error => {
+        alert("❌ Une erreur est survenue. Veuillez vérifier votre connexion.");
+        console.error("Erreur formulaire :", error);
+      });
+    });
+  </script>
+</body>
+</html>
