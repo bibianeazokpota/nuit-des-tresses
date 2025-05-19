@@ -4,16 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formulaire - Nuit des Tresses Africaines 3</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+   <form id="formulaire" method="POST"
+    action="https://script.google.com/macros/s/AKfycbygpkwnd2bS2_t0VVys6HGtVhJER4SEGl6lpvrwA72tWRIx92ZJ6o--3wFnYGUWHaGa/exec"
+    enctype="multipart/form-data">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <header>
       <img src="logo/logo.png" alt="Logo RAF MIXTE COIFFURE" class="logo" />
-      <h1>Formulaire de Participation – Coiffeuses  et coiffeurs </h1>
+      <h1>Formulaire de Participation – Coiffeuses et coiffeurs</h1>
       <p class="subtitle">
-        Dans le cadre de <strong>La Nuit des Tresses Africaines 3</strong> (22 nov. 2025 à Parakou), RAF MIXTE COIFFURE invite des Coiffeuses et coiffeurs talentueux    à rejoindre cet événement dédié à la beauté capillaire africaine.
+        Dans le cadre de <strong>La Nuit des Tresses Africaines 3</strong> (22 nov. 2025 à Parakou), RAF MIXTE COIFFURE invite des Coiffeuses et coiffeurs talentueux à rejoindre cet événement dédié à la beauté capillaire africaine.
       </p>
       <p class="subtitle">
         Ce formulaire recueille les infos nécessaires à la sélection : <strong>expérience</strong>, <strong>spécialités</strong> et <strong>motivation</strong>.
@@ -23,92 +25,92 @@
       </p>
     </header>
 
-    <form id="formulaire" method="POST" action="https://script.google.com/macros/s/AKfycbzldm1SH4Cas_uN878v5W3nX5JshfbLd7SzrXUYrXhq66CweMhDyUePYSFAw0lnse0/exec">
+    <form id="formulaire" method="POST" action="https://script.google.com/macros/s/AKfycbygpkwnd2bS2_t0VVys6HGtVhJER4SEGl6lpvrwA72tWRIx92ZJ6o--3wFnYGUWHaGa/exec" enctype="multipart/form-data">
       <h2>Informations personnelles</h2>
       <label>Nom complet :
-        <input type="text" name="nom" required>
+        <input type="text" name="nom" required />
       </label>
       <label>Nom du salon :
-        <input type="text" name="salon">
+        <input type="text" name="salon" />
       </label>
       <label>Téléphone WhatsApp :
-        <input type="tel" name="telephone" required>
+        <input type="tel" name="telephone" required />
       </label>
       <label>Email :
-        <input type="email" name="email" required>
+        <input type="email" name="email" required />
       </label>
       <label>Ville / Quartier :
-        <input type="text" name="ville" required>
+        <input type="text" name="ville" required />
       </label>
 
       <h2>Informations professionnelles</h2>
       <label>Expérience en coiffure (en années) :
-        <input type="number" name="experience" min="0">
+        <input type="number" name="experience" min="0" />
       </label>
       <label>Spécialités :
-        <input type="text" name="specialites">
+        <input type="text" name="specialites" />
       </label>
       <label>Avez-vous déjà participé à un événement ?
-        <select name="evenement">
-          <option>Oui</option>
-          <option>Non</option>
+        <select name="evenement" required>
+          <option value="" disabled selected>Choisissez</option>
+          <option value="Oui">Oui</option>
+          <option value="Non">Non</option>
         </select>
       </label>
       <label>Si oui, précisez :
-        <input type="text" name="details_evenement">
+        <input type="text" name="details_evenement" />
       </label>
 
       <h2>Portfolio</h2>
       <label>Lien vers vos pages (Facebook, Instagram...) :
-        <input type="url" name="portfolio">
+        <input type="url" name="portfolio" />
       </label>
       <label>Upload de photos de vos réalisations (tresses africaines uniquement, format JPG/PNG, max 5 Mo) :
-  <input type="file" name="photos" accept=".jpg,.jpeg,.png" multiple>
-</label>
-
+        <input type="file" name="photos" accept=".jpg,.jpeg,.png" multiple />
+      </label>
 
       <h2>Engagement</h2>
       <label>
-        <input type="checkbox" name="dispo" required>
+        <input type="checkbox" name="dispo" required />
         Je suis disponible le 22 novembre 2025
       </label>
       <label>
-        <input type="checkbox" name="conditions" required>
+        <input type="checkbox" name="conditions" required />
         J’accepte les conditions de participation
       </label>
 
       <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
       <label>
-        <input type="checkbox" name="engagements" value="Respect des horaires">
+        <input type="checkbox" name="engagements" value="Respect des horaires" />
         Je m’engage à respecter les horaires de l’événement
       </label>
       <label>
-        <input type="checkbox" name="engagements" value="Professionnalisme sur scène">
+        <input type="checkbox" name="engagements" value="Professionnalisme sur scène" />
         Je m’engage à adopter une attitude professionnelle sur scène
       </label>
       <label>
-        <input type="checkbox" name="engagements" value="Tenue correcte exigée">
+        <input type="checkbox" name="engagements" value="Tenue correcte exigée" />
         Je respecterai le dress code ou la tenue exigée
       </label>
       <label>
-        <input type="checkbox" name="engagements" value="Disponibilité pour les répétitions">
+        <input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" />
         Je serai disponible pour les répétitions si besoin
       </label>
       <label>
-        <input type="checkbox" name="engagements" value="Participation active">
+        <input type="checkbox" name="engagements" value="Participation active" />
         Je participerai activement à la réussite de l’événement
       </label>
       <label>
-        <input type="checkbox" name="engagements" value="Respect du règlement">
+        <input type="checkbox" name="engagements" value="Respect du règlement" />
         Je respecterai le règlement intérieur de l’événement
       </label>
 
       <label>Motivation personnelle :
-        <textarea name="motivation" rows="4" placeholder="Pourquoi souhaitez-vous participer ? (150 mots max)"></textarea>
+        <textarea name="motivation" rows="4" placeholder="Pourquoi souhaitez-vous participer ? (150 mots max)" required></textarea>
       </label>
 
       <label>
-        <input type="checkbox" required>
+        <input type="checkbox" name="confirmation" required />
         Je confirme l’exactitude des informations fournies
       </label>
 
@@ -117,52 +119,66 @@
   </div>
 
  <script>
-  const form = document.getElementById("formulaire");
-  const photoInput = form.querySelector('input[name="photos"]');
+    const form = document.getElementById("formulaire");
+    const photoInput = document.getElementById("photos");
+    const motivationTextarea = document.getElementById("motivation");
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault(); // Empêche le rechargement automatique
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    // Vérification des photos
-    const files = photoInput.files;
-    const validTypes = ['image/jpeg', 'image/png'];
+      const files = photoInput.files;
+      const validTypes = ["image/jpeg", "image/png"];
 
-    if (files.length > 0) {
-      for (let file of files) {
+      // Vérification des types et tailles de fichiers
+      for (const file of files) {
         if (!validTypes.includes(file.type)) {
-          alert("❌ Seules les images JPG ou PNG sont autorisées pour les tresses africaines.");
+          alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
           return;
         }
-        if (file.size > 5 * 1024 * 1024) { // 5 Mo max
-          alert("❌ Chaque image doit faire moins de 5 Mo.");
+        if (file.size > 5 * 1024 * 1024) {
+          alert("❌ Chaque photo doit faire moins de 5 Mo.");
           return;
         }
       }
-    }
 
-    // Envoi des données si tout est correct
-    const data = new FormData(form);
+      // Vérification de la limite de 150 mots
+      const motivationText = motivationTextarea.value.trim();
+      const wordCount = motivationText.length > 0 ? motivationText.split(/\s+/).length : 0;
 
-    fetch(form.action, {
-      method: "POST",
-      body: data
-    })
-    .then(response => {
-      if (response.ok) {
-        alert("✅ Merci ! Votre candidature a été envoyée avec succès.");
-        window.location.href = "merci.html";
-      } else {
-        alert("❌ Erreur lors de l'envoi. Veuillez réessayer.");
+      if (wordCount > 150) {
+        alert(`❌ Votre texte de motivation contient ${wordCount} mots. La limite est de 150.`);
+        return;
       }
-    })
-    .catch(error => {
-      alert("❌ Une erreur est survenue. Veuillez vérifier votre connexion.");
-      console.error("Erreur formulaire :", error);
+
+      const data = new FormData(form);
+
+      // Envoi vers Google Sheets
+      fetch(form.action, {
+        method: "POST",
+        body: data,
+      }).catch((err) => {
+        console.error("Erreur lors de l'envoi vers Google Sheets :", err);
+      });
+
+      // Envoi vers backend Express
+      fetch("http://localhost:3000/api/candidature", {
+        method: "POST",
+        body: data,
+      })
+      .then((response) => {
+        if (response.ok) {
+          alert("✅ Merci ! Votre candidature a bien été envoyée.");
+          window.location.href = "merci.html";
+        } else {
+          alert("❌ Une erreur est survenue côté serveur.");
+        }
+      })
+      .catch((error) => {
+        alert("❌ Une erreur est survenue. Veuillez vérifier votre connexion.");
+        console.error("Erreur côté client :", error);
+      });
     });
-  });
-</script>
+  </script>
 
-
-  
 </body>
 </html>
