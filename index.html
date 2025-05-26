@@ -22,14 +22,13 @@
       </p>
     </header>
 
-    <form id="formulaire" method="POST" 
-          action="https://script.google.com/macros/s/AKfycbygpkwnd2bS2_t0VVys6HGtVhJER4SEGl6lpvrwA72tWRIx92ZJ6o--3wFnYGUWHaGa/exec" 
-          enctype="multipart/form-data" 
-          novalidate
-    >
+    <form id="formulaire" method="POST"
+      action="https://script.google.com/macros/s/AKfycbygpkwnd2bS2_t0VVys6HGtVhJER4SEGl6lpvrwA72tWRIx92ZJ6o--3wFnYGUWHaGa/exec"
+      enctype="multipart/form-data" novalidate>
+
+      <input type="hidden" name="timestamp" id="timestamp" />
 
       <h2>Informations personnelles</h2>
-
       <label for="nom">Nom complet :</label>
       <input type="text" id="nom" name="nom" required />
 
@@ -46,7 +45,6 @@
       <input type="text" id="ville" name="ville" required />
 
       <h2>Informations professionnelles</h2>
-
       <label for="experience">Expérience en coiffure (en années) :</label>
       <input type="number" id="experience" name="experience" min="0" />
 
@@ -64,7 +62,6 @@
       <input type="text" id="details_evenement" name="details_evenement" />
 
       <h2>Portfolio</h2>
-
       <label for="portfolio">Lien vers vos pages (Facebook, Instagram...) :</label>
       <input type="url" id="portfolio" name="portfolio" />
 
@@ -72,18 +69,16 @@
       <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" multiple />
 
       <h2>Engagement</h2>
-
       <label><input type="checkbox" name="dispo" required /> Je suis disponible le 22 novembre 2025</label>
       <label><input type="checkbox" name="conditions" required /> J’accepte les conditions de participation</label>
 
       <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
-
-      <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Je m’engage à respecter les horaires de l’événement</label>
-      <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Je m’engage à adopter une attitude professionnelle sur scène</label>
-      <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Je respecterai le dress code ou la tenue exigée</label>
-      <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Je serai disponible pour les répétitions si besoin</label>
-      <label><input type="checkbox" name="engagements" value="Participation active" /> Je participerai activement à la réussite de l’événement</label>
-      <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Je respecterai le règlement intérieur de l’événement</label>
+      <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Respect des horaires</label>
+      <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
+      <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
+      <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
+      <label><input type="checkbox" name="engagements" value="Participation active" /> Participation active</label>
+      <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Respect du règlement</label>
 
       <label for="motivation">Motivation personnelle :</label>
       <textarea id="motivation" name="motivation" rows="4" placeholder="Pourquoi souhaitez-vous participer ? (150 mots max)" required></textarea>
@@ -99,6 +94,7 @@
       const form = document.getElementById("formulaire");
       const photoInput = document.getElementById("photos");
       const motivationTextarea = document.getElementById("motivation");
+      const timestampInput = document.getElementById("timestamp");
 
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -125,7 +121,14 @@
           return;
         }
 
+        timestampInput.value = new Date().toISOString();
+
         const data = new FormData(form);
+
+        // Récupération des engagements multiples
+        const engagements = [];
+        document.querySelectorAll("input[name='engagements']:checked").forEach(e => engagements.push(e.value));
+        data.set("engagements", engagements.join(", "));
 
         try {
           // Envoi vers Google Sheets
@@ -138,7 +141,7 @@
             console.warn("⚠️ Envoi vers Google Sheets a échoué.");
           }
 
-          // Envoi vers backend Express en ligne (correction ici)
+          // Envoi vers backend Express
           const backendResponse = await fetch("https://backend-nuit-tresses.onrender.com/api/candidature", {
             method: "POST",
             body: data,
