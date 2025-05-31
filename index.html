@@ -89,76 +89,89 @@
     </form>
   </div>
 
-  <script>
-    (function () {
-      const form = document.getElementById("formulaire");
-      const photoInput = document.getElementById("photos");
-      const motivationTextarea = document.getElementById("motivation");
-      const timestampInput = document.getElementById("timestamp");
+ <script>
+  (function () {
+    const form = document.getElementById("formulaire");
+    const photoInput = document.getElementById("photos");
+    const motivationTextarea = document.getElementById("motivation");
+    const timestampInput = document.getElementById("timestamp");
 
-      form.addEventListener("submit", async function (e) {
-        e.preventDefault();
+    if (!form || !photoInput || !motivationTextarea || !timestampInput) {
+      console.error("❌ Le formulaire ou certains champs sont introuvables dans le DOM.");
+      return;
+    }
 
-        const files = photoInput.files;
-        const validTypes = ["image/jpeg", "image/png"];
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-        for (const file of files) {
-          if (!validTypes.includes(file.type)) {
-            alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
-            return;
-          }
-          if (file.size > 5 * 1024 * 1024) {
-            alert("❌ Chaque photo doit faire moins de 5 Mo.");
-            return;
-          }
-        }
+      const files = photoInput.files;
+      const validTypes = ["image/jpeg", "image/png"];
 
-        const motivationText = motivationTextarea.value.trim();
-        const wordCount = motivationText.split(/\s+/).filter(Boolean).length;
-
-        if (wordCount > 150) {
-          alert(`❌ Votre texte de motivation contient ${wordCount} mots. La limite est de 150.`);
+      for (const file of files) {
+        if (!validTypes.includes(file.type)) {
+          alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
           return;
         }
-
-        timestampInput.value = new Date().toISOString();
-
-        const data = new FormData(form);
-
-        // Récupération des engagements multiples
-        const engagements = [];
-        document.querySelectorAll("input[name='engagements']:checked").forEach(e => engagements.push(e.value));
-        data.set("engagements", engagements.join(", "));
-
-        try {
-          // Envoi vers Google Sheets
-          const googleResponse = await fetch(form.action, {
-            method: "POST",
-            body: data,
-          });
-
-          if (!googleResponse.ok) {
-            console.warn("⚠️ Envoi vers Google Sheets a échoué.");
-          }
-
-          // Envoi vers backend Express
-          const backendResponse = await fetch("https://backend-nuit-tresses.onrender.com/api/candidature", {
-            method: "POST",
-            body: data,
-          });
-
-          if (backendResponse.ok) {
-            alert("✅ Merci ! Votre candidature a bien été envoyée.");
-            window.location.href = "merci.html";
-          } else {
-            alert("❌ Une erreur est survenue côté serveur.");
-          }
-        } catch (error) {
-          alert("❌ Une erreur est survenue. Veuillez vérifier votre connexion.");
-          console.error("Erreur côté client :", error);
+        if (file.size > 5 * 1024 * 1024) {
+          alert("❌ Chaque photo doit faire moins de 5 Mo.");
+          return;
         }
-      });
-    })();
-  </script>
+      }
+
+      const motivationText = motivationTextarea.value.trim();
+      const wordCount = motivationText.split(/\s+/).filter(Boolean).length;
+
+      if (wordCount > 150) {
+        alert(`❌ Votre texte de motivation contient ${wordCount} mots. La limite est de 150.`);
+        return;
+      }
+
+      // Ajout du timestamp
+      timestampInput.value = new Date().toISOString();
+
+      // Préparation des engagements
+      const engagements = Array.from(
+        document.querySelectorAll("input[name='engagements']:checked")
+      ).map(e => e.value);
+
+      // Création du FormData
+      const data = new FormData(form);
+      data.set("engagements", engagements.join(", "));
+
+      try {
+        // Copie de FormData pour éviter les conflits entre les deux fetch
+        const dataForBackend = new FormData(form);
+        dataForBackend.set("engagements", engagements.join(", "));
+
+        // Envoi vers Google Sheets
+        const googleResponse = await fetch(form.action, {
+          method: "POST",
+          body: data,
+        });
+
+        if (!googleResponse.ok) {
+          console.warn("⚠️ Envoi vers Google Sheets a échoué.");
+        }
+
+        // Envoi vers le backend
+        const backendResponse = await fetch("https://backend-nuit-tresses.onrender.com/api/candidature", {
+          method: "POST",
+          body: dataForBackend,
+        });
+
+        if (backendResponse.ok) {
+          alert("✅ Merci ! Votre candidature a bien été envoyée.");
+          window.location.href = "merci.html";
+        } else {
+          alert("❌ Une erreur est survenue côté serveur. Veuillez réessayer.");
+        }
+      } catch (error) {
+        console.error("Erreur côté client :", error);
+        alert("❌ Une erreur réseau est survenue. Veuillez vérifier votre connexion.");
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
