@@ -22,61 +22,73 @@
       </p>
     </header>
 
-<form id="formulaire" method="POST"
-  action="https://script.google.com/macros/s/AKfycbzdlMRtQ8AT-tUH-YKuwa0Q41c_p-jJW8ESWL3MGS-MNg9S9f0Kp7Qk3f034dsA6Th6/exec"
-  enctype="multipart/form-data" novalidate>
+    <form id="formulaire" method="POST"
+      action="https://script.google.com/macros/s/AKfycbzdlMRtQ8AT-tUH-YKuwa0Q41c_p-jJW8ESWL3MGS-MNg9S9f0Kp7Qk3f034dsA6Th6/exec"
+      enctype="multipart/form-data" novalidate>
 
-  <input type="hidden" name="timestamp" id="timestamp" />
+      <input type="hidden" name="timestamp" id="timestamp" />
 
-  <!-- Autres sections inchangées jusqu'ici -->
+      <h2>Informations personnelles</h2>
+      <label for="nom">Nom complet :</label>
+      <input type="text" id="nom" name="nom" required />
 
-  <label for="portfolio">Lien vers vos pages (Facebook, Instagram...) :</label>
-  <input type="url" id="portfolio" name="portfolio" autocomplete="url" />
+      <label for="salon">Nom du salon :</label>
+      <input type="text" id="salon" name="salon" />
 
-  <label for="photos">Upload de photos de vos réalisations :</label>
-  <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" multiple />
+      <label for="telephone">Téléphone WhatsApp :</label>
+      <input type="tel" id="telephone" name="telephone" required pattern="[\d\s+\-]{6,}" />
 
-  <!-- Ajout d'id pour les cases à cocher -->
-  <h2>Engagement</h2>
-  <div class="checkbox-group">
-    <input type="checkbox" id="dispo" name="dispo" required />
-    <label for="dispo">Je suis disponible le 22 novembre 2025</label><br/>
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required />
 
-    <input type="checkbox" id="conditions" name="conditions" required />
-    <label for="conditions">J’accepte les conditions de participation</label>
-  </div>
+      <label for="ville">Ville / Quartier :</label>
+      <input type="text" id="ville" name="ville" required />
 
-  <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
-  <div class="checkbox-group">
-    <input type="checkbox" id="horaire" name="engagements" value="Respect des horaires" />
-    <label for="horaire">Respect des horaires</label><br/>
-    
-    <input type="checkbox" id="scene" name="engagements" value="Professionnalisme sur scène" />
-    <label for="scene">Professionnalisme sur scène</label><br/>
-    
-    <input type="checkbox" id="tenue" name="engagements" value="Tenue correcte exigée" />
-    <label for="tenue">Tenue correcte exigée</label><br/>
-    
-    <input type="checkbox" id="repetition" name="engagements" value="Disponibilité pour les répétitions" />
-    <label for="repetition">Disponibilité pour les répétitions</label><br/>
-    
-    <input type="checkbox" id="active" name="engagements" value="Participation active" />
-    <label for="active">Participation active</label><br/>
-    
-    <input type="checkbox" id="reglement" name="engagements" value="Respect du règlement" />
-    <label for="reglement">Respect du règlement</label>
-  </div>
+      <h2>Informations professionnelles</h2>
+      <label for="experience">Expérience en coiffure (en années) :</label>
+      <input type="number" id="experience" name="experience" min="0" />
 
-  <label for="motivation">Motivation personnelle :</label>
-  <textarea id="motivation" name="motivation" rows="4" autocomplete="off" placeholder="Pourquoi souhaitez-vous participer ? (150 mots max)" required></textarea>
+      <label for="specialites">Spécialités :</label>
+      <input type="text" id="specialites" name="specialites" />
 
-  <input type="checkbox" id="confirmation" name="confirmation" required />
-  <label for="confirmation">Je confirme l’exactitude des informations fournies</label>
+      <label for="evenement">Avez-vous déjà participé à un événement ?</label>
+      <select id="evenement" name="evenement" required>
+        <option value="" disabled selected>Choisissez</option>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
 
-  <button type="submit">Envoyer ma candidature</button>
-</form>
+      <label for="details_evenement">Si oui, précisez :</label>
+      <input type="text" id="details_evenement" name="details_evenement" />
 
-    
+      <h2>Portfolio</h2>
+      <label for="portfolio">Lien vers vos pages (Facebook, Instagram...) :</label>
+      <input type="url" id="portfolio" name="portfolio" />
+
+      <label for="photos">Upload de photos de vos réalisations :</label>
+      <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" multiple />
+
+      <h2>Engagement</h2>
+      <label><input type="checkbox" name="dispo" required /> Je suis disponible le 22 novembre 2025</label>
+      <label><input type="checkbox" name="conditions" required /> J’accepte les conditions de participation</label>
+
+      <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Respect des horaires</label>
+        <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
+        <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
+        <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
+        <label><input type="checkbox" name="engagements" value="Participation active" /> Participation active</label>
+        <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Respect du règlement</label>
+      </div>
+
+      <label for="motivation">Motivation personnelle :</label>
+      <textarea id="motivation" name="motivation" rows="4" placeholder="Pourquoi souhaitez-vous participer ? (150 mots max)" required></textarea>
+
+      <label><input type="checkbox" name="confirmation" required /> Je confirme l’exactitude des informations fournies</label>
+
+      <button type="submit">Envoyer ma candidature</button>
+    </form>
   </div>
 
   <script>
