@@ -73,12 +73,14 @@
       <label><input type="checkbox" name="conditions" required /> J’accepte les conditions de participation</label>
 
       <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
-      <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Respect des horaires</label>
-      <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
-      <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
-      <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
-      <label><input type="checkbox" name="engagements" value="Participation active" /> Participation active</label>
-      <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Respect du règlement</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Respect des horaires</label>
+        <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
+        <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
+        <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
+        <label><input type="checkbox" name="engagements" value="Participation active" /> Participation active</label>
+        <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Respect du règlement</label>
+      </div>
 
       <label for="motivation">Motivation personnelle :</label>
       <textarea id="motivation" name="motivation" rows="4" placeholder="Pourquoi souhaitez-vous participer ? (150 mots max)" required></textarea>
@@ -89,89 +91,76 @@
     </form>
   </div>
 
- <script>
-  (function () {
-    const form = document.getElementById("formulaire");
-    const photoInput = document.getElementById("photos");
-    const motivationTextarea = document.getElementById("motivation");
-    const timestampInput = document.getElementById("timestamp");
+  <script>
+    (function () {
+      const form = document.getElementById("formulaire");
+      const photoInput = document.getElementById("photos");
+      const motivationTextarea = document.getElementById("motivation");
+      const timestampInput = document.getElementById("timestamp");
 
-    if (!form || !photoInput || !motivationTextarea || !timestampInput) {
-      console.error("❌ Le formulaire ou certains champs sont introuvables dans le DOM.");
-      return;
-    }
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+        // Validation des images
+        const files = photoInput.files;
+        const validTypes = ["image/jpeg", "image/png"];
 
-      const files = photoInput.files;
-      const validTypes = ["image/jpeg", "image/png"];
-
-      for (const file of files) {
-        if (!validTypes.includes(file.type)) {
-          alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
-          return;
-        }
-        if (file.size > 5 * 1024 * 1024) {
-          alert("❌ Chaque photo doit faire moins de 5 Mo.");
-          return;
-        }
-      }
-
-      const motivationText = motivationTextarea.value.trim();
-      const wordCount = motivationText.split(/\s+/).filter(Boolean).length;
-
-      if (wordCount > 150) {
-        alert(`❌ Votre texte de motivation contient ${wordCount} mots. La limite est de 150.`);
-        return;
-      }
-
-      // Ajout du timestamp
-      timestampInput.value = new Date().toISOString();
-
-      // Préparation des engagements
-      const engagements = Array.from(
-        document.querySelectorAll("input[name='engagements']:checked")
-      ).map(e => e.value);
-
-      // Création du FormData
-      const data = new FormData(form);
-      data.set("engagements", engagements.join(", "));
-
-      try {
-        // Copie de FormData pour éviter les conflits entre les deux fetch
-        const dataForBackend = new FormData(form);
-        dataForBackend.set("engagements", engagements.join(", "));
-
-        // Envoi vers Google Sheets
-        const googleResponse = await fetch(form.action, {
-          method: "POST",
-          body: data,
-        });
-
-        if (!googleResponse.ok) {
-          console.warn("⚠️ Envoi vers Google Sheets a échoué.");
+        for (const file of files) {
+          if (!validTypes.includes(file.type)) {
+            return alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
+          }
+          if (file.size > 5 * 1024 * 1024) {
+            return alert("❌ Chaque photo doit faire moins de 5 Mo.");
+          }
         }
 
-        // Envoi vers le backend
-        const backendResponse = await fetch("https://backend-nuit-tresses.onrender.com/api/candidature", {
-          method: "POST",
-          body: dataForBackend,
-        });
-
-        if (backendResponse.ok) {
-          alert("✅ Merci ! Votre candidature a bien été envoyée.");
-          window.location.href = "merci.html";
-        } else {
-          alert("❌ Une erreur est survenue côté serveur. Veuillez réessayer.");
+        // Vérification du nombre de mots de motivation
+        const motivationText = motivationTextarea.value.trim();
+        const wordCount = motivationText.split(/\s+/).filter(Boolean).length;
+        if (wordCount > 150) {
+          return alert(`❌ Votre texte contient ${wordCount} mots. Limite : 150.`);
         }
-      } catch (error) {
-        console.error("Erreur côté client :", error);
-        alert("❌ Une erreur réseau est survenue. Veuillez vérifier votre connexion.");
-      }
-    });
-  })();
-</script>
 
+        // Ajout du timestamp
+        timestampInput.value = new Date().toISOString();
+
+        // Traitement des engagements
+        const engagements = Array.from(document.querySelectorAll("input[name='engagements']:checked"))
+          .map(input => input.value);
+        
+        // Envoi des données
+        const formData = new FormData(form);
+        formData.set("engagements", engagements.join(", "));
+
+        try {
+          // Google Apps Script (Google Sheet)
+          const responseGoogle = await fetch(form.action, {
+            method: "POST",
+            body: formData
+          });
+
+          if (!responseGoogle.ok) {
+            console.warn("⚠️ Envoi vers Google Sheets échoué.");
+          }
+
+          // Backend Node.js (Render)
+          const responseBackend = await fetch("https://backend-nuit-tresses.onrender.com/api/candidature", {
+            method: "POST",
+            body: formData
+          });
+
+          if (responseBackend.ok) {
+            alert("✅ Merci ! Votre candidature a bien été envoyée.");
+            window.location.href = "merci.html";
+          } else {
+            alert("❌ Une erreur serveur est survenue. Veuillez réessayer.");
+          }
+        } catch (error) {
+          console.error("Erreur d'envoi :", error);
+          alert("❌ Une erreur réseau est survenue. Vérifiez votre connexion.");
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
