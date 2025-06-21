@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Formulaire - Nuit des Tresses Africaines 3</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -26,135 +27,149 @@
       enctype="multipart/form-data" novalidate>
 
       <input type="hidden" name="timestamp" id="timestamp" />
+      <input type="hidden" name="photosUrls" id="photosUrls" />
 
-      <h2>Informations personnelles</h2>
-      <label for="nom">Nom complet :</label>
-      <input type="text" id="nom" name="nom" required />
+      <fieldset>
+        <legend>Informations personnelles</legend>
 
-      <label for="salon">Nom du salon :</label>
-      <input type="text" id="salon" name="salon" />
+        <label for="nom">Nom complet :</label>
+        <input type="text" id="nom" name="nom" required />
 
-      <label for="telephone">Téléphone WhatsApp :</label>
-      <input type="tel" id="telephone" name="telephone" required />
+        <label for="salon">Nom du salon :</label>
+        <input type="text" id="salon" name="salon" />
 
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required />
+        <label for="telephone">Téléphone WhatsApp :</label>
+        <input type="tel" id="telephone" name="telephone" required />
 
-      <label for="ville">Ville / Quartier :</label>
-      <input type="text" id="ville" name="ville" required />
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required />
 
-      <h2>Informations professionnelles</h2>
-      <label for="experience">Expérience en coiffure (en années) :</label>
-      <input type="number" id="experience" name="experience" min="0" />
+        <label for="ville">Ville / Quartier :</label>
+        <input type="text" id="ville" name="ville" required />
+      </fieldset>
 
-      <label for="specialites">Spécialités :</label>
-      <input type="text" id="specialites" name="specialites" />
+      <fieldset>
+        <legend>Informations professionnelles</legend>
 
-      <label for="evenement">Avez-vous déjà participé à un événement ?</label>
-      <select id="evenement" name="evenement" required>
-        <option value="" disabled selected>Choisissez</option>
-        <option value="Oui">Oui</option>
-        <option value="Non">Non</option>
-      </select>
+        <label for="experience">Expérience en coiffure (en années) :</label>
+        <input type="number" id="experience" name="experience" min="0" />
 
-      <label for="details_evenement">Si oui, précisez :</label>
-      <input type="text" id="details_evenement" name="details_evenement" />
+        <label for="specialites">Spécialités :</label>
+        <input type="text" id="specialites" name="specialites" />
 
-      <h2>Portfolio</h2>
-      <label for="portfolio">Lien vers vos pages (Facebook, Instagram...) :</label>
-      <input type="url" id="portfolio" name="portfolio" />
+        <label for="evenement">Avez-vous déjà participé à un événement ?</label>
+        <select id="evenement" name="evenement" required>
+          <option value="" disabled selected>Choisissez</option>
+          <option value="Oui">Oui</option>
+          <option value="Non">Non</option>
+        </select>
 
-      <label for="photos">Upload de photos de vos réalisations :</label>
-      <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" multiple />
+        <label for="details_evenement">Si oui, précisez :</label>
+        <input type="text" id="details_evenement" name="details_evenement" />
+      </fieldset>
 
-      <h2>Engagement</h2>
-      <label><input type="checkbox" id="dispo" name="dispo" required /> Je suis disponible le 22 novembre 2025</label>
-      <label><input type="checkbox" id="conditions" name="conditions" required /> J’accepte les conditions de participation</label>
+      <fieldset>
+        <legend>Portfolio & Photos</legend>
 
-      <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Respect des horaires</label>
-        <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
-        <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
-        <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
-        <label><input type="checkbox" name="engagements" value="Participation active" /> Participation active</label>
-        <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Respect du règlement</label>
-      </div>
+        <label for="portfolio">Lien vers vos pages (Facebook, Instagram...) :</label>
+        <input type="url" id="portfolio" name="portfolio" />
 
-      <label for="motivation">Motivation personnelle :</label>
-      <textarea id="motivation" name="motivation" rows="4" required></textarea>
+        <label for="photos">Upload de photos de vos réalisations :</label>
+        <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" multiple />
+      </fieldset>
 
-      <label><input type="checkbox" name="confirmation" required /> Je confirme l’exactitude des informations fournies</label>
+      <fieldset>
+        <legend>Engagement</legend>
+
+        <label><input type="checkbox" id="dispo" name="dispo" required /> Je suis disponible le 22 novembre 2025</label>
+        <label><input type="checkbox" id="conditions" name="conditions" required /> J’accepte les conditions de participation</label>
+
+        <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Respect des horaires</label>
+          <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
+          <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
+          <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
+          <label><input type="checkbox" name="engagements" value="Participation active" /> Participation active</label>
+          <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Respect du règlement</label>
+        </div>
+
+        <label for="motivation">Motivation personnelle :</label>
+        <textarea id="motivation" name="motivation" rows="4" required></textarea>
+
+        <label><input type="checkbox" name="confirmation" required /> Je confirme l’exactitude des informations fournies</label>
+      </fieldset>
 
       <button type="submit">Envoyer ma candidature</button>
     </form>
   </div>
 
- document.getElementById("formulaire").addEventListener("submit", async function (e) {
-  e.preventDefault();
+  <script>
+  document.getElementById("formulaire").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  const form = this;
-  const photosInput = document.getElementById("photos");
-  const hiddenInput = document.getElementById("photosUrls");
-  const files = photosInput.files;
+    const form = this;
+    const photosInput = document.getElementById("photos");
+    const hiddenInput = document.getElementById("photosUrls");
+    const files = photosInput.files;
 
-  const CLOUD_NAME = "divuihocg";
-  const UPLOAD_PRESET = "formulaire_nuit_tresses"; // Crée ce preset dans ton compte Cloudinary
+    const CLOUD_NAME = "divuihocg";
+    const UPLOAD_PRESET = "formulaire_nuit_tresses"; // Crée ce preset dans ton compte Cloudinary
 
-  // Vérifier les fichiers (taille et type)
-  for (const file of files) {
-    if (!["image/jpeg", "image/png"].includes(file.type)) {
-      return alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
+    // Vérifier les fichiers (taille et type)
+    for (const file of files) {
+      if (!["image/jpeg", "image/png"].includes(file.type)) {
+        return alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        return alert("❌ Chaque photo doit faire moins de 5 Mo.");
+      }
     }
-    if (file.size > 5 * 1024 * 1024) {
-      return alert("❌ Chaque photo doit faire moins de 5 Mo.");
+
+    // Upload vers Cloudinary
+    const uploadedUrls = [];
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+        if (data.secure_url) {
+          uploadedUrls.push(data.secure_url);
+        }
+      } catch (err) {
+        console.error("Erreur d'upload Cloudinary :", err);
+        return alert("❌ Une erreur est survenue lors de l’upload des images.");
+      }
     }
-  }
 
-  // Upload vers Cloudinary
-  const uploadedUrls = [];
-  for (const file of files) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", UPLOAD_PRESET);
+    // Injecter les URLs dans le champ caché
+    hiddenInput.value = uploadedUrls.join(",");
 
+    // Envoi final du formulaire vers Apps Script
     try {
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+      const response = await fetch(form.action, {
         method: "POST",
-        body: formData
+        body: new FormData(form)
       });
 
-      const data = await res.json();
-      if (data.secure_url) {
-        uploadedUrls.push(data.secure_url);
+      if (response.ok) {
+        alert("✅ Merci ! Votre candidature a bien été envoyée.");
+        window.location.href = "merci.html";
+      } else {
+        alert("❌ Une erreur serveur est survenue. Veuillez réessayer.");
       }
-    } catch (err) {
-      console.error("Erreur d'upload Cloudinary :", err);
-      return alert("❌ Une erreur est survenue lors de l’upload des images.");
+    } catch (error) {
+      console.error("Erreur d’envoi :", error);
+      alert("❌ Une erreur réseau est survenue. Vérifiez votre connexion.");
     }
-  }
-
-  // Injecter les URLs dans le champ caché
-  hiddenInput.value = uploadedUrls.join(",");
-
-  // Envoi final du formulaire vers Apps Script
-  try {
-    const response = await fetch(form.action, {
-      method: "POST",
-      body: new FormData(form)
-    });
-
-    if (response.ok) {
-      alert("✅ Merci ! Votre candidature a bien été envoyée.");
-      window.location.href = "merci.html";
-    } else {
-      alert("❌ Une erreur serveur est survenue. Veuillez réessayer.");
-    }
-  } catch (error) {
-    console.error("Erreur d’envoi :", error);
-    alert("❌ Une erreur réseau est survenue. Vérifiez votre connexion.");
-  }
-});
-
+  });
+  </script>
 </body>
 </html>
