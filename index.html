@@ -23,10 +23,11 @@
     </header>
 
     <!-- ✅ Formsubmit : envoyer vers ton adresse email -->
-    <form method="POST" action="https://formsubmit.co/nuitdestressesafricaines@gmail.com" enctype="multipart/form-data">
+    <form id="formulaire" method="POST" action="https://formsubmit.co/nuitdestressesafricaines@gmail.com">
       <!-- Réglages Formsubmit -->
       <input type="hidden" name="_next" value="https://bibianeazokpota.github.io/nuit-des-tresses/merci.html">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="PhotosURLs" id="PhotosURLs" />
 
       <fieldset>
         <legend>Informations personnelles</legend>
@@ -73,8 +74,8 @@
         <label for="portfolio">Lien vers vos pages (Facebook, Instagram...) :</label>
         <input type="url" id="portfolio" name="Portfolio" />
 
-        <label for="photos">Upload de photos de vos réalisations :</label>
-        <input type="file" id="photos" name="Photos" accept=".jpg,.jpeg,.png" multiple />
+        <label for="photos">Téléversez vos photos de tresses :</label>
+        <input type="file" id="photos" accept=".jpg,.jpeg,.png" multiple required />
       </fieldset>
 
       <fieldset>
@@ -102,5 +103,57 @@
       <button type="submit">Envoyer ma candidature</button>
     </form>
   </div>
+
+  <!-- Script Cloudinary pour upload avant soumission -->
+  <script>
+    document.getElementById("formulaire").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const photosInput = document.getElementById("photos");
+      const hiddenInput = document.getElementById("PhotosURLs");
+      const files = photosInput.files;
+      const uploadedUrls = [];
+
+      const CLOUD_NAME = "divuihocg"; 
+      const UPLOAD_PRESET = "formulaire_tress"; 
+
+      for (const file of files) {
+        if (!["image/jpeg", "image/png"].includes(file.type)) {
+          alert("❌ Format non autorisé (JPG/PNG uniquement)");
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          alert("❌ Chaque photo doit faire moins de 5 Mo");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", UPLOAD_PRESET);
+
+        try {
+          const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await res.json();
+          if (data.secure_url) {
+            uploadedUrls.push(data.secure_url);
+          }
+        } catch (err) {
+          alert("❌ Erreur lors de l’envoi à Cloudinary.");
+          console.error(err);
+          return;
+        }
+      }
+
+      hiddenInput.value = uploadedUrls.join(", ");
+
+      // Soumettre le formulaire vers Formsubmit
+      this.submit();
+    });
+  </script>
 </body>
 </html>
