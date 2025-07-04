@@ -22,154 +22,85 @@
       </p>
     </header>
 
-    <form id="formulaire" method="POST"
-      action="https://script.google.com/macros/s/AKfycbzdlMRtQ8AT-tUH-YKuwa0Q41c_p-jJW8ESWL3MGS-MNg9S9f0Kp7Qk3f034dsA6Th6/exec"
-      enctype="multipart/form-data" novalidate>
-
-      <input type="hidden" name="timestamp" id="timestamp" />
-      <input type="hidden" name="photosUrls" id="photosUrls" />
+    <!-- ✅ Formsubmit : envoyer vers ton adresse email -->
+    <form method="POST" action="https://formsubmit.co/nuitdestressesafricaines@gmail.com" enctype="multipart/form-data">
+      <!-- Réglages Formsubmit -->
+      <input type="hidden" name="_next" value="https://bibianeazokpota.github.io/nuit-des-tresses/merci.html">
+      <input type="hidden" name="_captcha" value="false">
 
       <fieldset>
         <legend>Informations personnelles</legend>
 
         <label for="nom">Nom complet :</label>
-        <input type="text" id="nom" name="nom" required />
+        <input type="text" id="nom" name="Nom complet" required />
 
         <label for="salon">Nom du salon :</label>
-        <input type="text" id="salon" name="salon" />
+        <input type="text" id="salon" name="Salon" />
 
         <label for="telephone">Téléphone WhatsApp :</label>
-        <input type="tel" id="telephone" name="telephone" required />
+        <input type="tel" id="telephone" name="Téléphone" required />
 
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="Email" required />
 
         <label for="ville">Ville / Quartier :</label>
-        <input type="text" id="ville" name="ville" required />
+        <input type="text" id="ville" name="Ville" required />
       </fieldset>
 
       <fieldset>
         <legend>Informations professionnelles</legend>
 
         <label for="experience">Expérience en coiffure (en années) :</label>
-        <input type="number" id="experience" name="experience" min="0" />
+        <input type="number" id="experience" name="Expérience" min="0" />
 
         <label for="specialites">Spécialités :</label>
-        <input type="text" id="specialites" name="specialites" />
+        <input type="text" id="specialites" name="Spécialités" />
 
         <label for="evenement">Avez-vous déjà participé à un événement ?</label>
-        <select id="evenement" name="evenement" required>
+        <select id="evenement" name="A participé à un événement" required>
           <option value="" disabled selected>Choisissez</option>
           <option value="Oui">Oui</option>
           <option value="Non">Non</option>
         </select>
 
         <label for="details_evenement">Si oui, précisez :</label>
-        <input type="text" id="details_evenement" name="details_evenement" />
+        <input type="text" id="details_evenement" name="Détails événement" />
       </fieldset>
 
       <fieldset>
         <legend>Portfolio & Photos</legend>
 
         <label for="portfolio">Lien vers vos pages (Facebook, Instagram...) :</label>
-        <input type="url" id="portfolio" name="portfolio" />
+        <input type="url" id="portfolio" name="Portfolio" />
 
         <label for="photos">Upload de photos de vos réalisations :</label>
-        <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" multiple />
+        <input type="file" id="photos" name="Photos" accept=".jpg,.jpeg,.png" multiple />
       </fieldset>
 
       <fieldset>
         <legend>Engagement</legend>
 
-        <label><input type="checkbox" id="dispo" name="dispo" required /> Je suis disponible le 22 novembre 2025</label>
-        <label><input type="checkbox" id="conditions" name="conditions" required /> J’accepte les conditions de participation</label>
+        <label><input type="checkbox" name="Disponible le 22 novembre" required /> Je suis disponible le 22 novembre 2025</label>
+        <label><input type="checkbox" name="Conditions acceptées" required /> J’accepte les conditions de participation</label>
 
         <p style="margin-top: 1rem; font-weight: bold;">Engagements professionnels :</p>
         <div class="checkbox-group">
-          <label><input type="checkbox" name="engagements" value="Respect des horaires" /> Respect des horaires</label>
-          <label><input type="checkbox" name="engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
-          <label><input type="checkbox" name="engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
-          <label><input type="checkbox" name="engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
-          <label><input type="checkbox" name="engagements" value="Participation active" /> Participation active</label>
-          <label><input type="checkbox" name="engagements" value="Respect du règlement" /> Respect du règlement</label>
+          <label><input type="checkbox" name="Engagements" value="Respect des horaires" /> Respect des horaires</label>
+          <label><input type="checkbox" name="Engagements" value="Professionnalisme sur scène" /> Professionnalisme sur scène</label>
+          <label><input type="checkbox" name="Engagements" value="Tenue correcte exigée" /> Tenue correcte exigée</label>
+          <label><input type="checkbox" name="Engagements" value="Disponibilité pour les répétitions" /> Disponibilité pour les répétitions</label>
+          <label><input type="checkbox" name="Engagements" value="Participation active" /> Participation active</label>
+          <label><input type="checkbox" name="Engagements" value="Respect du règlement" /> Respect du règlement</label>
         </div>
 
         <label for="motivation">Motivation personnelle :</label>
-        <textarea id="motivation" name="motivation" rows="4" required></textarea>
+        <textarea id="motivation" name="Motivation" rows="4" required></textarea>
 
-        <label><input type="checkbox" name="confirmation" required /> Je confirme l’exactitude des informations fournies</label>
+        <label><input type="checkbox" name="Confirmation" required /> Je confirme l’exactitude des informations fournies</label>
       </fieldset>
 
       <button type="submit">Envoyer ma candidature</button>
     </form>
   </div>
-
-  <script>
-  document.getElementById("formulaire").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const form = this;
-    const photosInput = document.getElementById("photos");
-    const hiddenInput = document.getElementById("photosUrls");
-    const files = photosInput.files;
-
-    const CLOUD_NAME = "divuihocg";
-    const UPLOAD_PRESET = "formulaire_nuit_tresses"; // Crée ce preset dans ton compte Cloudinary
-
-    // Vérifier les fichiers (taille et type)
-    for (const file of files) {
-      if (!["image/jpeg", "image/png"].includes(file.type)) {
-        return alert("❌ Seuls les formats JPG ou PNG sont acceptés.");
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        return alert("❌ Chaque photo doit faire moins de 5 Mo.");
-      }
-    }
-
-    // Upload vers Cloudinary
-    const uploadedUrls = [];
-    for (const file of files) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", UPLOAD_PRESET);
-
-      try {
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-          method: "POST",
-          body: formData
-        });
-
-        const data = await res.json();
-        if (data.secure_url) {
-          uploadedUrls.push(data.secure_url);
-        }
-      } catch (err) {
-        console.error("Erreur d'upload Cloudinary :", err);
-        return alert("❌ Une erreur est survenue lors de l’upload des images.");
-      }
-    }
-
-    // Injecter les URLs dans le champ caché
-    hiddenInput.value = uploadedUrls.join(",");
-
-    // Envoi final du formulaire vers Apps Script
-    try {
-      const response = await fetch(form.action, {
-        method: "POST",
-        body: new FormData(form)
-      });
-
-      if (response.ok) {
-        alert("✅ Merci ! Votre candidature a bien été envoyée.");
-        window.location.href = "merci.html";
-      } else {
-        alert("❌ Une erreur serveur est survenue. Veuillez réessayer.");
-      }
-    } catch (error) {
-      console.error("Erreur d’envoi :", error);
-      alert("❌ Une erreur réseau est survenue. Vérifiez votre connexion.");
-    }
-  });
-  </script>
 </body>
 </html>
